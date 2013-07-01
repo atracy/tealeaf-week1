@@ -1,18 +1,20 @@
+# Calculator Class
+
 class Mymath
   def multiply(num1, num2)
-    val = num1.to_i * num2.to_i
+    return num1.to_i * num2.to_i
   end
 
   def divide(num1, num2)
-    val = num1.to_f / num2.to_f
+    return num1.to_f / num2.to_f
   end
 
-  def add(num1,num2)
-    val = num1.to_i + num2.to_i
+  def add(num1, num2)
+    return num1.to_i + num2.to_i
   end
 
   def subtract(num1, num2)
-    val = num1.to_i - num2.to_i
+    return num1.to_i - num2.to_i
   end
 end
 
@@ -30,7 +32,8 @@ while isoperator == false
   if oper == '+' || oper == '-' || oper == '*' || oper == '/'
     isoperator = true
   else
-    puts "whoops! you entered #{oper} which isn't an operator.  Please try again"
+    puts "whoops! you entered #{oper} which isn't an operator.
+Please try again"
   end
 end
 
