@@ -97,18 +97,34 @@ class Person
   def initialize(personname)
     @name = personname
     @points = 0
+    @cards = []
   end
 
   def getname
     return @name
   end
-  def wantcard?(val)
-
-  end
 
   def getcard(anothercard)
-    @points = anothercard.getpoints
-    puts "#{@name} you currently have #{@points}"
+    @cards.push anothercard
+    if anothercard.getpoints == 'jack'||
+      anothercard.getpoints == 'queen' ||
+      anothercard.getpoints == 'king'
+    @points = @points.to_i + 10
+  elsif anothercard.getpoints == 'Ace'
+    if @points > 21
+      @points = @points + 1
+    elsif (@points + 11) > 21
+      @points = @points + 1
+    else
+      @points = @points + 11
+    end
+  else
+    @points = @points.to_i + anothercard.getpoints.to_i
+    end
+  end
+
+  def getpoints
+    return @points
   end
 end
 # Blackjack Class
@@ -129,8 +145,18 @@ class Blackjack
     @deck.shuffle
     puts "The #{dealer.getname} is dealing the cards"
     card1 = @deck.getcard
-    puts "your drew the #{card1.getpoints} of #{card1.getsuite}"
+    card2 = @deck.getcard
+    puts "You got the #{card1.getpoints} of #{card1.getsuite}"
+    puts "you also got the #{card2.getpoints} of #{card2.getsuite}"
     player.getcard card1
+    player.getcard card2
+    anothercard? = 'y'
+    while anothercard == 'y'
+      puts "you now have #{player.getpoints} do you want another card? (y/n)"
+      anothercard? = gets.chomp!
+      if anothercard? == 'y'
+
+      end
     #card2 = @deck.getcard
     #puts "Hi #{player.name}!  Your cards are #{card1.suite} #{card1.points}
  #{card2.suite} #{card2.points}"
