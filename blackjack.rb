@@ -24,9 +24,46 @@ end
 # Deck Class
 class Deck
   def initialize
+    @deck = []
 
-    puts 'generate cards and put them in an array'
-    @deck = [Card.new(1, 'spade', false), Card.new(2, 'spade', false)]
+    puts 'initialize deck'
+    9.times do |i|
+      @deck.push Card.new((i + 1).to_s, 'spade', false)
+    end
+
+
+    9.times do |i|
+      @deck.push Card.new((i + 1).to_s, 'hearts', false)
+    end
+
+    9.times do |i|
+      @deck.push Card.new((i + 1).to_s, 'diamonds', false)
+    end
+
+    9.times do |i|
+      @deck.push Card.new((i + 1).to_s, 'clubs', false)
+    end
+
+    @deck.push Card.new('jack', 'clubs', false )
+    @deck.push Card.new('queen', 'clubs', false)
+    @deck.push Card.new('king', 'clubs', false)
+    @deck.push Card.new('Ace', 'clubs', false)
+
+    @deck.push Card.new('jack', 'hearts', false )
+    @deck.push Card.new('queen', 'hearts', false)
+    @deck.push Card.new('king', 'hearts', false)
+    @deck.push Card.new('Ace', 'hearts', false)
+
+    @deck.push Card.new('jack', 'diamonds', false )
+    @deck.push Card.new('queen', 'diamonds', false)
+    @deck.push Card.new('king', 'diamonds', false)
+    @deck.push Card.new('Ace', 'diamonds', false)
+
+    @deck.push Card.new('jack', 'spade', false )
+    @deck.push Card.new('queen', 'spade', false)
+    @deck.push Card.new('king', 'spade', false)
+    @deck.push Card.new('Ace', 'spade', false)
+
   end
 
   def shuffle
