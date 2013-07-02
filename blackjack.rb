@@ -1,3 +1,5 @@
+require 'pry'
+
 # Card Class
 class Card
   def initialize(pnts, suit, isused)
@@ -19,6 +21,9 @@ class Card
     return @used
   end
 
+  def setused(state)
+    @used = state
+  end
 
 end
 # Deck Class
@@ -28,7 +33,7 @@ class Deck
 
     puts 'initialize deck'
     9.times do |i|
-      @deck.push Card.new((i + 1).to_s, 'spade', false)
+      @deck.push Card.new((i + 1).to_s, 'spades', false)
     end
 
 
@@ -59,28 +64,30 @@ class Deck
     @deck.push Card.new('king', 'diamonds', false)
     @deck.push Card.new('Ace', 'diamonds', false)
 
-    @deck.push Card.new('jack', 'spade', false )
-    @deck.push Card.new('queen', 'spade', false)
-    @deck.push Card.new('king', 'spade', false)
-    @deck.push Card.new('Ace', 'spade', false)
+    @deck.push Card.new('jack', 'spades', false )
+    @deck.push Card.new('queen', 'spades', false)
+    @deck.push Card.new('king', 'spades', false)
+    @deck.push Card.new('Ace', 'spades', false)
 
   end
 
   def shuffle
-    @deck.shuffle
-    @deck.shuffle
-    puts 'deck shuffled'
+    @deck.shuffle!
+    @deck.shuffle!
   end
 
   def getcard
-    puts "there are #{@deck.count} cards in the deck"
+
     @deck.each do |d|
-      puts "points: #{d.getpoints}"
-      puts "Suite: #{d.getsuite}"
-      puts "Is Used: #{d.isused}"
+      if d.isused == false
+
+        d.setused true
+        return d
+        break
+
+      end
     end
-    @deck.select { |a| puts "#{a.getpoints} #{a.isused} #{a.getsuite}" if 1 == 1 }
-    return @deck[0]
+
   end
 
 end
@@ -122,7 +129,7 @@ class Blackjack
     @deck.shuffle
     puts "The #{dealer.getname} is dealing the cards"
     card1 = @deck.getcard
-    puts "your current card has #{card1.getpoints} points"
+    puts "your drew the #{card1.getpoints} of #{card1.getsuite}"
     player.getcard card1
     #card2 = @deck.getcard
     #puts "Hi #{player.name}!  Your cards are #{card1.suite} #{card1.points}
