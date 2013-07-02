@@ -16,7 +16,7 @@ class Card
   end
 
   def isused
-    return @isused
+    return @used
   end
 
 
