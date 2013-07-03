@@ -2,6 +2,7 @@
 
 # Card Class
 class Card
+  attr_writer :state
   def initialize(pnts, suit, isused)
     @used = false
     @points = pnts
@@ -31,36 +32,11 @@ class Deck
   def initialize
     @deck = []
 
-    j = 0
-
-    9.times do
-      j += 1
-      @deck.push Card.new((j + 1).to_s, 'spades', false)
-      @deck.push Card.new((j + 1).to_s, 'hearts', false)
-      @deck.push Card.new((j + 1).to_s, 'diamonds', false)
-      @deck.push Card.new((j + 1).to_s, 'clubs', false)
-    end
-
-
-    @deck.push Card.new('jack', 'clubs', false )
-    @deck.push Card.new('queen', 'clubs', false)
-    @deck.push Card.new('king', 'clubs', false)
-    @deck.push Card.new('Ace', 'clubs', false)
-
-    @deck.push Card.new('jack', 'hearts', false )
-    @deck.push Card.new('queen', 'hearts', false)
-    @deck.push Card.new('king', 'hearts', false)
-    @deck.push Card.new('Ace', 'hearts', false)
-
-    @deck.push Card.new('jack', 'diamonds', false )
-    @deck.push Card.new('queen', 'diamonds', false)
-    @deck.push Card.new('king', 'diamonds', false)
-    @deck.push Card.new('Ace', 'diamonds', false)
-
-    @deck.push Card.new('jack', 'spades', false )
-    @deck.push Card.new('queen', 'spades', false)
-    @deck.push Card.new('king', 'spades', false)
-    @deck.push Card.new('Ace', 'spades', false)
+    self.loadnumbercards
+    self.loadclubroyalty
+    self.loadheartsroyalty
+    self.loaddiamondsroyalty
+    self.loadspadesroyalty
 
   end
 
@@ -76,13 +52,55 @@ class Deck
 
         d.setused true
         return d
-        break
-
       end
     end
 
   end
 
+  def loadnumbercards
+
+    j = 0
+
+    9.times do
+      j += 1
+      @deck.push Card.new((j + 1).to_s, 'spades', false)
+      @deck.push Card.new((j + 1).to_s, 'hearts', false)
+      @deck.push Card.new((j + 1).to_s, 'diamonds', false)
+      @deck.push Card.new((j + 1).to_s, 'clubs', false)
+    end
+
+  end
+
+  def loadclubroyalty
+
+    @deck.push Card.new('jack', 'clubs', false)
+    @deck.push Card.new('queen', 'clubs', false)
+    @deck.push Card.new('king', 'clubs', false)
+    @deck.push Card.new('Ace', 'clubs', false)
+  end
+
+  def loadheartsroyalty
+
+    @deck.push Card.new('jack', 'hearts', false)
+    @deck.push Card.new('queen', 'hearts', false)
+    @deck.push Card.new('king', 'hearts', false)
+    @deck.push Card.new('Ace', 'hearts', false)
+  end
+
+  def loaddiamondsroyalty
+
+    @deck.push Card.new('jack', 'diamonds', false)
+    @deck.push Card.new('queen', 'diamonds', false)
+    @deck.push Card.new('king', 'diamonds', false)
+    @deck.push Card.new('Ace', 'diamonds', false)
+  end
+
+  def loadspadesroyalty
+    @deck.push Card.new('jack', 'spades', false)
+    @deck.push Card.new('queen', 'spades', false)
+    @deck.push Card.new('king', 'spades', false)
+    @deck.push Card.new('Ace', 'spades', false)
+  end
 end
 
 # Person Class
@@ -101,7 +119,7 @@ class Person
 
   def getcard(anothercard)
     @cards.push anothercard
-    if anothercard.getpoints == 'jack'||
+    if anothercard.getpoints == 'jack' ||
       anothercard.getpoints == 'queen' ||
       anothercard.getpoints == 'king'
     @points = @points.to_i + 10
@@ -114,9 +132,7 @@ class Person
 
   def getpoints
     if @haveace == true
-      if @points > 21
-        temppoints = @points + 1
-      elsif (@points + 11) > 21
+      if @points > 21 || (@points + 11) > 21
         temppoints = @points + 1
       else
         temppoints = @points + 11
@@ -156,20 +172,21 @@ dealer.getcard dcard1
 player.getcard card2
 dealer.getcard dcard2
 
-
 anothercard = 'y'
 
 while anothercard == 'y'
 
-  puts "you now have #{player.getpoints} points do you want another card? (y/n)"
+  print "you now have #{player.getpoints}"
+  puts ' points do you want another card? (y/n)'
   anothercard = gets.chomp!
 
   if anothercard == 'y'
 
     curcard = @deck.getcard
     player.getcard curcard
-    puts "The dealer hands you a card"
-    puts "you turn it over and find it's the #{curcard.getpoints} of #{curcard.getsuite}"
+    puts 'The dealer hands you a card'
+    print "you turn it over and find it's the #{curcard.getpoints} "
+    puts " of #{curcard.getsuite}"
 
     if player.getpoints > 21
 
@@ -186,10 +203,11 @@ puts "He has a #{dcard2.getpoints} of #{dcard2.getsuite}"
 
 while dealer.getpoints <= 17
 
-  puts "he then grabs a card from the deck for himself"
+  puts 'he then grabs a card from the deck for himself'
   curcard = @deck.getcard
   dealer.getcard @deck.getcard
-  puts "he draws a #{curcard.getpoints} of #{curcard.getsuite} for a total of #{dealer.getpoints} points"
+  print "he draws a #{curcard.getpoints} of #{curcard.getsuite}"
+  puts  " for a total of #{dealer.getpoints} points"
 end
 
 puts "dealer has #{dealer.getpoints} and you have #{player.getpoints}"
