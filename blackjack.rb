@@ -216,9 +216,13 @@ if dealer.getpoints > 21 && player.getpoints > 21
 
   puts 'A Bust!  Both were over!'
 
+
 elsif  dealer.getpoints == player.getpoints
 
   puts 'It was a tie! No one wins'
+
+elsif dealer.getpoints == 21
+  puts "Sorry #{player.getname}, You Lose!"
 
 elsif (player.getpoints > dealer.getpoints && player.getpoints <= 21) ||
   (dealer.getpoints > 21 && player.getpoints <= 21)
@@ -227,6 +231,6 @@ elsif (player.getpoints > dealer.getpoints && player.getpoints <= 21) ||
 
 else
 
-  puts "Sorry #{player.getname}, You Lose!"
+
 end
 
