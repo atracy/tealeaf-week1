@@ -1,4 +1,4 @@
-require 'pry'
+# Encoding: utf-8
 
 # Card Class
 class Card
@@ -105,7 +105,6 @@ class Person
       anothercard.getpoints == 'queen' ||
       anothercard.getpoints == 'king'
     @points = @points.to_i + 10
-    #binding.pry
   elsif anothercard.getpoints == 'Ace'
     @haveace = true
   else
@@ -152,20 +151,10 @@ dcard2 = @deck.getcard
 puts "You got the #{card1.getpoints} of #{card1.getsuite}"
 puts "you also got the #{card2.getpoints} of #{card2.getsuite}"
 
-puts "Dealer has the #{dcard1.getpoints} of #{dcard1.getsuite}"
-puts "Dealer has the #{dcard2.getpoints} of #{dcard2.getsuite}"
-
 player.getcard card1
-puts "Gave player #{card1.getpoints} player thinks he has #{player.getpoints} points"
-
 dealer.getcard dcard1
-puts "Gave dealer #{dcard1.getpoints} player thinks he has #{dealer.getpoints} points"
-
 player.getcard card2
-puts "Gave player #{card2.getpoints} player thinks he has #{player.getpoints} points"
-
 dealer.getcard dcard2
-puts "Gave dealer #{dcard2.getpoints} player thinks he has #{dealer.getpoints} points"
 
 
 anothercard = 'y'
@@ -201,7 +190,6 @@ while dealer.getpoints <= 17
   curcard = @deck.getcard
   dealer.getcard @deck.getcard
   puts "he draws a #{curcard.getpoints} of #{curcard.getsuite} for a total of #{dealer.getpoints} points"
-  #binding.pry
 end
 
 puts "dealer has #{dealer.getpoints} and you have #{player.getpoints}"
@@ -214,8 +202,8 @@ elsif  dealer.getpoints == player.getpoints
 
   puts 'It was a tie! No one wins'
 
-elsif (player.getpoints > dealer.getpoints && player.getpoints < 21) ||
-  (dealer.getpoints > 21 && player.getpoints < 21)
+elsif (player.getpoints > dealer.getpoints && player.getpoints <= 21) ||
+  (dealer.getpoints > 21 && player.getpoints <= 21)
 
   puts "Congratulations #{player.getname}!!!!  You win!!!!!"
 
